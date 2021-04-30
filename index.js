@@ -1,14 +1,6 @@
 let display = document.getElementById('display');
 
 let buttons = Array.from(document.getElementsByClassName('button'));
-  function calculate(){
-      var a=document.getElementById("dis").Value;
-      var b=eval(a);
-      if(b==undefined){
-          b=null;
-      }
-      document.getElementById("dis").Value=b;
-  }
 
 buttons.map( button => {
     button.addEventListener('click', (e) => {
@@ -17,7 +9,11 @@ buttons.map( button => {
                 display.innerText = '';
                 break;
             case '=':
-                display.innerText=calculate();
+                try{
+                    display.innerText = eval(display.innerText);
+                } catch {
+                    display.innerText = "Error"
+                }
                 break;
             case '←':
                 if (display.innerText){
@@ -28,4 +24,4 @@ buttons.map( button => {
                 display.innerText += e.target.innerText;
         }
     });
-}); 
+});
